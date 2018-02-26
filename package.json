@@ -1,5 +1,5 @@
 {
-  "name": "laravel-react",
+  "name": "redux-laravel",
   "version": "v2.2.2",
   "scripts": {
     "dev": "cross-env NODE_ENV=development node_modules/webpack/bin/webpack.js --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
@@ -41,6 +41,9 @@
     "jquery": "^3.2.1",
     "laravel-mix": "^1.7.2",
     "lodash": "^4.17.4",
+    "material-design-icons": "^3.0.1",
+    "material-ui": "^1.0.0-beta.35",
+    "material-ui-icons": "^1.0.0-beta.35",
     "moment": "^2.20.1",
     "popper.js": "^1.12.9",
     "prop-types": "^15.6.0",
@@ -54,7 +57,8 @@
     "reactstrap": "5.0.0-alpha.4",
     "redux": "^3.7.2",
     "redux-logger": "^3.0.6",
-    "redux-thunk": "^2.2.0"
+    "redux-thunk": "^2.2.0",
+    "typeface-roboto": "0.0.54"
   },
   "dependencies": {
     "ree-validate": "moeen-basra/ree-validate#development"

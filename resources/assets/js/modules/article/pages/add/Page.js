@@ -70,7 +70,6 @@ class Page extends Component {
         if (success) {
           this.submit(article)
           this.props.history.push("/articles")
-          console.log("!!!!!!!")
         } else {
           this.setState({ errors })
         }

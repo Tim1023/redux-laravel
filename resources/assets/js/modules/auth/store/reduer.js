@@ -28,7 +28,6 @@ const reducer = (state = initialState, { type, payload = null }) => {
 };
 
 function login(state, payload) {
-  console.log("tokennnn")
   localStorage.setItem('access_token', payload);
   HTTP.defaults.headers.common['Authorization'] = `Bearer ${payload}`;
 

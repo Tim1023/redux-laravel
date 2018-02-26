@@ -8,7 +8,6 @@ import Transformer from '../../utils/Transformer'
  * @returns {function(*)}
  */
 export function fetchUser() {
-    console.log("!!!!!!")
   return dispatch => {
     return Http.get('auth/user')
       .then(res => {
