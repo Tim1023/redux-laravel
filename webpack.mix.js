@@ -33,6 +33,6 @@ if (mix.inProduction()) {
 } else {
   mix.sourceMaps()
   mix.browserSync({
-    proxy: 'http://laravel-react.test'
+    proxy: 'http://redux-laravel.test'
   })
 }

@@ -9,6 +9,8 @@ import compose from 'recompose/compose';
 
 import PrivateHeader from './PrivateHeader'
 import PublicHeader from './PublicHeader'
+import SideMenu from './SideMenu'
+
 
 import { withStyles } from 'material-ui/styles';
 import AppBar from 'material-ui/AppBar';
@@ -16,7 +18,9 @@ import Toolbar from 'material-ui/Toolbar';
 import Typography from 'material-ui/Typography';
 import IconButton from 'material-ui/IconButton';
 import MenuIcon from 'material-ui-icons/Menu';
-
+import blue from 'material-ui/colors/blue';
+import {Link} from "react-router-dom";
+import Button from 'material-ui/Button';
 
 
 const styles = {
@@ -30,9 +34,14 @@ const styles = {
         marginLeft: -12,
         marginRight: 20,
     },
-    padding: {
+    appBar: {
         padding: 0,
-    }
+        backgroundColor: blue["500"],
+        boxShadow:'none'
+    },
+    list: {
+        width: 250,
+    },
 };
 
 class Navigation extends Component {
@@ -48,6 +57,7 @@ class Navigation extends Component {
     
     this.state = {
         anchorEl: null,
+        drawerToggle: false,
     }
 
     this.logout = this.logout.bind(this);
@@ -59,7 +69,9 @@ class Navigation extends Component {
     handleClose = () => {
         this.setState({ anchorEl: null });
     };
-
+    handleDrawer = (toggle) => {
+        this.setState({ drawerToggle: toggle})
+    };
     logout() {
         this.props.dispatch(logout())
         this.handleClose()
@@ -67,26 +79,30 @@ class Navigation extends Component {
 
     render() {
         const { classes,isAuthenticated,user } = this.props;
-        const { anchorEl } = this.state;
+        const { anchorEl,drawerToggle } = this.state;
         const open = Boolean(anchorEl);
         return (
             <div className={classes.root}>
-
-                <AppBar position="fixed" className={classes.padding}>
+                <AppBar position="fixed" className={classes.appBar} >
                     <Toolbar>
-                        <IconButton className={classes.menuButton} color="inherit" aria-label="Menu">
+                        <IconButton className={classes.menuButton} color="inherit" aria-label="Menu" onClick={() => this.handleDrawer(true)}>
                             <MenuIcon />
                         </IconButton>
-                        <Typography variant="title" color="inherit" className={classes.flex}>
-                            Title
-                        </Typography>
+                        <div className={classes.flex} >
+                            <Button component={Link} to="/" color="inherit">
+                                <Typography variant="title" color="inherit">
+                                    Blog
+                                </Typography>
+                            </Button>
+                        </div>
                         {
                             isAuthenticated
                             ?<PrivateHeader user={user} open={open} anchorEl={anchorEl} logout={this.logout}  handleClose={this.handleClose} handleMenu={this.handleMenu} />
-                            :<PublicHeader/>
+                            :<PublicHeader open={open} anchorEl={anchorEl} handleClose={this.handleClose} handleMenu={this.handleMenu}/>
                         }
                     </Toolbar>
                 </AppBar>
+                <SideMenu drawerToggle={drawerToggle} handleDrawer={this.handleDrawer}/>
             </div>
         );
     }

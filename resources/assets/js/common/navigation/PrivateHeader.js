@@ -48,6 +48,7 @@ const PrivateHeader = ({ user,  open, anchorEl, logout, handleMenu, handleClose}
             open={open}
             onClose={handleClose}
         >
+            <MenuItem disabled={true}>{user.name} </MenuItem>
             <MenuItem onClick={handleClose} component={Link} to={`/users/${user.id}/edit`}>Profile</MenuItem>
             <MenuItem onClick={logout}>Logout</MenuItem>
         </Menu>
