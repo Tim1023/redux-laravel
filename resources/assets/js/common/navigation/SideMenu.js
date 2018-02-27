@@ -32,7 +32,7 @@ const SideMenu = ({ drawerToggle,handleDrawer}) => (
             role="button"
 
         >
-            <div className={menuStyle}>
+            <div style={menuStyle}>
                 <List component="nav">
                     <ListItem button onClick={()=>handleDrawer(false)}>
                         <ListItemIcon>
