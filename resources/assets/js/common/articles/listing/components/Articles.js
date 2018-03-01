@@ -24,20 +24,15 @@ class Articles extends Component {
 
   renderArticles() {
     return this.props.articles.map((article, index) => {
-      return <Article key={`article-${index}`}
+      this.state.articles.push( <Article key={`article-${index}`}
                       index={index}
-                      article={article}/>
+                      article={article}/>)
     })
   }
   nextArticles() {
       this.props.dispatch(articleListRequest({ url: this.props.meta.next_page_url }))
   }
-  componentDidUpdate() {
-    console.log(this.props)
-    this.state.articles.push( <Article key={`article-0`}
-                                       index={0}
-                                       article={this.props.articles[0]}/>)
-  }
+
   render() {
     return (<section id="components-articles">
       <div className="container">
@@ -50,7 +45,7 @@ class Articles extends Component {
                 next={this.nextArticles}
                 hasMore={true}
                 loader={<h1>Loading...</h1>}>
-                { this.state.articles }
+                { this.renderArticles() && this.state.articles }
                 </InfiniteScroll>
 
         </div>
