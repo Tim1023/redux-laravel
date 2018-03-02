@@ -10,7 +10,7 @@ const initialState = {
   data: [],
   from: 0,
   lastPage: 0,
-  nextPageUrl: '',
+  nextPageUrl: "http://redux-laravel.test/api/v1/articles/published?page=2",
   path: '',
   perPage: 0,
   prevPageUrl: null,
