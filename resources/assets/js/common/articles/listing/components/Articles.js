@@ -2,16 +2,13 @@ import React, {Component} from 'react'
 import PropTypes from 'prop-types'
 import Article from './Article'
 import InfiniteScroll from 'react-infinite-scroll-component';
-import {articleListRequest} from "../../../../modules/article/service";
 import Http from "../../../../utils/Http";
-import * as articleActions from "../../../../modules/article/store/actions";
 
 class Articles extends Component {
     static displayName = 'Articles'
     static propTypes = {
         articles: PropTypes.array.isRequired,
         dispatch: PropTypes.func.isRequired,
-        meta: PropTypes.object.isRequired
     }
 
     constructor(props) {
@@ -19,36 +16,44 @@ class Articles extends Component {
 
         this.state = {
             articles: [],
-            meta: []
+            nextPageUrl: "/articles/published?page=2"
         }
         this.nextArticles = this.nextArticles.bind(this)
 
-    }
-    componentDidMount(){
-        this.setState({meta:this.props.meta})
     }
 
     renderArticles() {
         if (this.state.articles.length === 0) {
 
-            return this.props.articles.map((article, index) => {
-                this.state.articles.push(<Article key={`article-${index}`}
-                                                  index={index}
+            return this.props.articles.map((article) => {
+                this.state.articles.push(<Article key={`article-${article.id}`}
+                                                  index={article.id}
                                                   article={article}/>)
             })
+
         }
-        else console.log(this.state.meta)
+        else {
+            return true
+
+        }
     }
 
     nextArticles() {
-        Http.get(this.state.meta.nextPageUrl)
+        let moreDivs = [];
+        Http.get(this.state.nextPageUrl)
             .then((res) => {
-                this.state.articles = res.data
-                this.state.meta = res.meta
+                this.setState({nextPageUrl: res.data.next_page_url})
+
+                res.data.data.map((article) => {
+                    moreDivs.push(<Article key={`article-${article.id}`}
+                                           index={article.id}
+                                           article={article}/>)
+                })
+                this.setState({articles: this.state.articles.concat(moreDivs)});
             })
-            .catch((err) => {
+            .catch(() => {
                 // TODO: handle err
-                console.error(err.response)
+                console.error(this.state.articles)
             })
     }
 
@@ -56,6 +61,7 @@ class Articles extends Component {
         return (<section id="components-articles">
                 <div className="container">
                     <div className="row">
+
                         <InfiniteScroll
                             pullDownToRefresh
                             pullDownToRefreshContent={<h3 style={{textAlign: 'center'}}>&#8595; Pull down to
