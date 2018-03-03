@@ -1,6 +1,13 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import blue from 'material-ui/colors/blue';
+import { withStyles } from 'material-ui/styles';
 
+const styles = {
+  bgColor: {
+      backgroundColor: blue["500"]
+  }
+}
 class Pagination extends Component {
   static displayName = 'Pagination'
   static propTypes = {
@@ -17,11 +24,11 @@ class Pagination extends Component {
   }
   
   renderLinks() {
-    const { meta } = this.props
+    const { meta,classes } = this.props
     const range = [...Array(meta.lastPage).keys()]
-    
-    return range.map(n => {
-      const className = meta.currentPage === (n+1) ? 'primary' : 'light'
+
+      return range.map(n => {
+      const className = meta.currentPage === (n+1) ? `primary ${classes.bgColor} ` : 'light'
       
       return <button key={n}
                      type="button"
@@ -32,11 +39,14 @@ class Pagination extends Component {
   
   render() {
     return <div className="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
-      <div className="btn-group mr-2" role="group" aria-label="First group">
+      <div className="btn-group mx-auto flex-wrap" role="group" aria-label="First group">
         {this.renderLinks()}
       </div>
     </div>
   }
 }
+Pagination.propTypes = {
+    classes: PropTypes.object.isRequired,
+};
 
-export default Pagination
+export default withStyles(styles)(Pagination);

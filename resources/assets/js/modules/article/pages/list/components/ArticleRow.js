@@ -1,35 +1,38 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { Link } from 'react-router-dom'
+import {Link} from 'react-router-dom'
+
+import {TableCell, TableRow} from 'material-ui/Table';
+import Button from 'material-ui/Button';
 
 const displayName = 'ArticleRow'
 const propTypes = {
-  index: PropTypes.number.isRequired,
-  article: PropTypes.object.isRequired,
-  togglePublish: PropTypes.func.isRequired,
-  handleRemove: PropTypes.func.isRequired,
+    index: PropTypes.number.isRequired,
+    article: PropTypes.object.isRequired,
+    togglePublish: PropTypes.func.isRequired,
+    handleRemove: PropTypes.func.isRequired,
 }
 
-const ArticleRow = ({ index, article, togglePublish, handleRemove }) => {
-  return (<tr key={index}>
-    <th scope="row">{index+1}</th>
-    <td>{article.title}</td>
-    <td>{article.description}</td>
-    <td>{article.createdAt && article.createdAt.format('MMMM, DD YYYY')}</td>
-    <td>{article.updatedAt && article.updatedAt.format('MMMM, DD YYYY')}</td>
-    <td>{article.publishedAt && article.publishedAt.format('MMMM, DD YYYY')}</td>
-    <td>
-      <div className="btn-group" role="group" aria-label="Actions">
-        {
-          article.published
-          ? <button className="btn btn-warning" onClick={() => togglePublish(article.id)}>Un Published</button>
-          : <button className="btn btn-success" onClick={() => togglePublish(article.id)}>Publish</button>
-        }
-        <Link className="btn btn-primary" to={`articles/${article.id}/edit`}>Edit</Link>
-        <button className="btn btn-danger" onClick={() => handleRemove(article.id)}>Delete</button>
-      </div>
-    </td>
-  </tr>)
+const ArticleRow = ({index, article, togglePublish, handleRemove}) => {
+    return (<TableRow key={index}>
+        <TableCell scope="row">{index + 1}</TableCell>
+        <TableCell>{article.title}</TableCell>
+        <TableCell>{article.description}</TableCell>
+        <TableCell>{article.createdAt && article.createdAt.format('MMMM, DD YYYY')}</TableCell>
+        <TableCell>{article.updatedAt && article.updatedAt.format('MMMM, DD YYYY')}</TableCell>
+        <TableCell>{article.publishedAt && article.publishedAt.format('MMMM, DD YYYY')}</TableCell>
+        <TableCell>
+            <div className="btn-group" role="group" aria-label="Actions">
+                {
+                    article.published
+                        ? <Button onClick={() => togglePublish(article.id)} color="primary">Unpublished</Button>
+                        : <Button onClick={() => togglePublish(article.id)} color="primary">Publish</Button>
+                }
+                <Link to={`articles/${article.id}/edit`}><Button color="primary"> Edit </Button></Link>
+                <Button onClick={() => handleRemove(article.id)} color="secondary">Delete</Button>
+            </div>
+        </TableCell>
+    </TableRow>)
 }
 
 ArticleRow.displayName = displayName
