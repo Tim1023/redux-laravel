@@ -22,7 +22,12 @@ import AddIcon from 'material-ui-icons/Add';
 import blue from 'material-ui/colors/blue';
 
 const styles = {
-    backgroundColor: blue["500"],
+    bgColor: {
+        backgroundColor: blue["500"]
+    },
+    overFlow: {
+        overflowX: 'auto'
+    }
 }
 class Page extends Component {
     static displayName = 'ArticlesPage'
@@ -86,12 +91,12 @@ class Page extends Component {
                 <Typography variant="title">Articles
                 </Typography>
                 <Link to='/articles/create' className="ml-auto">
-                    <Button variant="fab" aria-label="add"  style={styles}  className="text-white">
+                    <Button variant="fab" aria-label="add"  style={styles.bgColor}  className="text-white">
                         <AddIcon/>
                     </Button>
                 </Link>
             </Toolbar>
-            <Table className="table table-responsive table-striped">
+            <Table className="table table-responsive table-striped" style={styles.overFlow}>
                 <TableHead className="thead-inverse">
                     <TableRow>
                         <TableCell >#</TableCell>

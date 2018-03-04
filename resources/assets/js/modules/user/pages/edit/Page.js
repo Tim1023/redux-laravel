@@ -5,6 +5,8 @@ import _ from 'lodash'
 import { userUpdateRequest } from '../../service'
 import ReeValidate from 'ree-validate'
 import {withRouter} from "react-router-dom";
+import Paper from 'material-ui/Paper';
+import Typography from 'material-ui/Typography';
 
 // import components
 import Form from './components/Form'
@@ -94,17 +96,14 @@ class Page extends Component {
   }
   
   render() {
-    return <main className="col-sm-9 ml-sm-auto col-md-10 pt-3" role="main">
-      <h1>Profile</h1>
-  
-      <section className="row">
-        <div className="col-12 col-md-9 col-sm-12">
+    return <Paper className="col-sm-9 mx-auto col-md-10 my-sm-4 p-5" role="main" elevation={4}>
+        <Typography variant="display1" gutterBottom>
+            Profile
+        </Typography>
           <Form {...this.state}
                 onChange={this.handleChange}
                 onSubmit={this.handleSubmit}/>
-        </div>
-      </section>
-    </main>
+    </Paper>
   }
 }
 

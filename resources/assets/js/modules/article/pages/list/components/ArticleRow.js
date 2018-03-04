@@ -4,6 +4,7 @@ import {Link} from 'react-router-dom'
 
 import {TableCell, TableRow} from 'material-ui/Table';
 import Button from 'material-ui/Button';
+import blue from "material-ui/colors/blue";
 
 const displayName = 'ArticleRow'
 const propTypes = {
@@ -12,7 +13,11 @@ const propTypes = {
     togglePublish: PropTypes.func.isRequired,
     handleRemove: PropTypes.func.isRequired,
 }
-
+const styles = {
+    btn: {
+        width: '55px'
+    }
+}
 const ArticleRow = ({index, article, togglePublish, handleRemove}) => {
     return (<TableRow key={index}>
         <TableCell scope="row">{index + 1}</TableCell>
@@ -25,8 +30,8 @@ const ArticleRow = ({index, article, togglePublish, handleRemove}) => {
             <div className="btn-group" role="group" aria-label="Actions">
                 {
                     article.published
-                        ? <Button onClick={() => togglePublish(article.id)} color="primary">Unpublished</Button>
-                        : <Button onClick={() => togglePublish(article.id)} color="primary">Publish</Button>
+                        ? <Button onClick={() => togglePublish(article.id)} style={styles.btn} color="primary">withdraw</Button>
+                        : <Button onClick={() => togglePublish(article.id)} style={styles.btn} color="primary">Publish</Button>
                 }
                 <Link to={`articles/${article.id}/edit`}><Button color="primary"> Edit </Button></Link>
                 <Button onClick={() => handleRemove(article.id)} color="secondary">Delete</Button>
