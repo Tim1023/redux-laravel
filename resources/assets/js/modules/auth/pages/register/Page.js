@@ -6,6 +6,7 @@ import _ from 'lodash'
 import { Redirect } from 'react-router-dom'
 import { register } from '../../service'
 import ReeValidate from 'ree-validate'
+import Paper from 'material-ui/Paper'
 
 // import components
 import Form from './components/Form'
@@ -114,20 +115,17 @@ class Page extends Component {
     }
     
     return (<div className="container py-5">
-      <div className="row">
-        <div className="col-md-12">
-          <div className="row">
-            <div className="mx-auto">
-              <span className="anchor"/>
-              <div className="card has-shadow">
-                <div className="card-body">
-                  <Form {...props}  />
+        <div className="row">
+            <div className="col-md-12">
+                <div className="row">
+                    <Paper className="mx-auto">
+                        <div className="p-4">
+                            <Form {...props} />
+                        </div>
+                    </Paper>
                 </div>
-              </div>
             </div>
-          </div>
         </div>
-      </div>
     </div>)
   }
 }
