@@ -29,6 +29,14 @@ const routes = [
       loading: LoadingComponent,
     }),
   },
+  {
+      path: '/resume',
+      exact: true,
+      component: Loadable({
+          loader: () => import('./pages/resume'),
+          loading: LoadingComponent,
+      }),
+  },
 ]
 
 export default routes
