@@ -4,7 +4,7 @@ import Article from './Article'
 import InfiniteScroll from 'react-infinite-scroll-component';
 import Http from "../../../../utils/Http";
 import Typography from 'material-ui/Typography';
-import { CircularProgress } from 'material-ui/Progress';
+import {CircularProgress} from 'material-ui/Progress';
 
 class Articles extends Component {
     static displayName = 'Articles'
@@ -43,7 +43,7 @@ class Articles extends Component {
 
     nextArticles() {
         let moreDivs = [];
-        this.setState({hasMore:false})
+        this.setState({hasMore: false})
         Http.get(this.state.nextPageUrl)
             .then((res) => {
                 this.setState({nextPageUrl: res.data.next_page_url})
@@ -54,44 +54,41 @@ class Articles extends Component {
                                            article={article}/>)
                 })
                 this.setState({articles: this.state.articles.concat(moreDivs)});
-                if (this.state.nextPageUrl)
-                {
-                    this.setState({hasMore:true})
+                if (this.state.nextPageUrl) {
+                    this.setState({hasMore: true})
                 }
                 else {
-                    this.setState({hasMore:false})
+                    this.setState({hasMore: false})
                 }
 
             })
             .catch((err) => {
                 console.error(err)
-                this.setState({hasMore:false})
+                this.setState({hasMore: false})
             })
     }
 
     render() {
         return (<section id="components-articles">
                 <div className="container">
-                    <div className="row">
 
-                        <InfiniteScroll
-                            pullDownToRefresh
-                            pullDownToRefreshContent={<Typography variant="title" style={{textAlign: 'center'}}>
-                                <CircularProgress />
-                            </Typography>}
-                            releaseToRefreshContent={<Typography variant="title" style={{textAlign: 'center'}}>
-                                <CircularProgress />
-                            </Typography>}
-                            refreshFunction={this.nextArticles}
-                            next={this.nextArticles}
-                            hasMore={this.state.hasMore}
-                            loader={<Typography variant="title" style={{textAlign: 'center'}}>
-                                <CircularProgress />
-                            </Typography>}>
-                            {this.renderArticles() && this.state.articles}
-                        </InfiniteScroll>
+                    <InfiniteScroll
+                        pullDownToRefresh
+                        pullDownToRefreshContent={<Typography variant="title" style={{textAlign: 'center'}}>
+                            <CircularProgress/>
+                        </Typography>}
+                        releaseToRefreshContent={<Typography variant="title" style={{textAlign: 'center'}}>
+                            <CircularProgress/>
+                        </Typography>}
+                        refreshFunction={this.nextArticles}
+                        next={this.nextArticles}
+                        hasMore={this.state.hasMore}
+                        loader={<Typography variant="title" style={{textAlign: 'center'}}>
+                            <CircularProgress/>
+                        </Typography>}>
+                        {this.renderArticles() && this.state.articles}
+                    </InfiniteScroll>
 
-                    </div>
                 </div>
             </section>
         )

@@ -11,6 +11,8 @@ import List, { ListItem, ListItemIcon, ListItemText } from 'material-ui/List';
 import Divider from 'material-ui/Divider';
 import BookIcon from 'material-ui-icons/Book';
 import CloseIcon from 'material-ui-icons/Close'
+import BlogIcon from 'material-ui-icons/LightbulbOutline'
+import ResumeIcon from 'material-ui-icons/VerifiedUser'
 
 // define component name
 const displayName = 'SideMenu'
@@ -46,6 +48,18 @@ const SideMenu = ({ drawerToggle,handleDrawer}) => (
                             <BookIcon />
                         </ListItemIcon>
                         <ListItemText primary="Articles" />
+                    </ListItem>
+                    <ListItem button component={Link} to="/blog">
+                        <ListItemIcon>
+                            <BlogIcon />
+                        </ListItemIcon>
+                        <ListItemText primary="Blog" />
+                    </ListItem>
+                    <ListItem button component={Link} to="/resume">
+                        <ListItemIcon>
+                            <ResumeIcon />
+                        </ListItemIcon>
+                        <ListItemText primary="Resume" />
                     </ListItem>
 
                 </List>
